@@ -1,5 +1,5 @@
 SignIn::Application.routes.draw do
-  root "residences#home"
+  root "pages#home"
   get "residences/home"
   get "residents/home"
   # The priority is based upon order of creation: first created -> highest priority.
