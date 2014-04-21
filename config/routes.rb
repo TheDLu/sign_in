@@ -1,4 +1,6 @@
 SignIn::Application.routes.draw do
+  resources :residents
+
   devise_for :users
   root "pages#home"
   get "residences/home"
