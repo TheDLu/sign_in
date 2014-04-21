@@ -1,30 +1,24 @@
 class ResidencesController < ApplicationController
   before_action :set_residence, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
 
-  # GET /residences
-  # GET /residences.json
   def index
     @residences = Residence.all
   end
 
-  # GET /residences/1
-  # GET /residences/1.json
   def show
   end
 
-  # GET /residences/new
   def new
-    @residence = Residence.new
+    @residence = current_user.residences.build
   end
 
-  # GET /residences/1/edit
   def edit
   end
 
-  # POST /residences
-  # POST /residences.json
   def create
-    @residence = Residence.new(residence_params)
+    @residence = current_user.residences.build(residence_params)
 
     respond_to do |format|
       if @residence.save
@@ -37,8 +31,6 @@ class ResidencesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /residences/1
-  # PATCH/PUT /residences/1.json
   def update
     respond_to do |format|
       if @residence.update(residence_params)
@@ -51,8 +43,6 @@ class ResidencesController < ApplicationController
     end
   end
 
-  # DELETE /residences/1
-  # DELETE /residences/1.json
   def destroy
     @residence.destroy
     respond_to do |format|
@@ -65,6 +55,11 @@ class ResidencesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_residence
       @residence = Residence.find(params[:id])
+    end
+
+    def correct_user
+      @residence = current_user.residences.find_by(id: params[:id])
+      redirect_to residences_path, notice: "Not authorized to edit this Residence" if @residence.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

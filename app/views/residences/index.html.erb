@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Email</th>
       <th>Description</th>
       <th></th>
       <th></th>
@@ -15,10 +16,13 @@
     <% @residences.each do |residence| %>
       <tr>
         <td><%= residence.name %></td>
+        <td><%= residence.user.email %></td>
         <td><%= residence.description %></td>
         <td><%= link_to 'Show', residence %></td>
-        <td><%= link_to 'Edit', edit_residence_path(residence) %></td>
-        <td><%= link_to 'Destroy', residence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if residence.user == current_user %>
+          <td><%= link_to 'Edit', edit_residence_path(residence) %></td>
+          <td><%= link_to 'Destroy', residence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +30,7 @@
 
 <br>
 
-<%= link_to 'New Residence', new_residence_path %>
+<% if user_signed_in? %>
+  <%= link_to 'New Residence', new_residence_path %>
+<% end %>
+

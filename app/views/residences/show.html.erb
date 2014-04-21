@@ -10,5 +10,7 @@
   <%= @residence.description %>
 </p>
 
-<%= link_to 'Edit', edit_residence_path(@residence) %> |
+<% if @residence.user == current_user %>
+	<%= link_to 'Edit', edit_residence_path(@residence) %> |
+<% end %>
 <%= link_to 'Back', residences_path %>
