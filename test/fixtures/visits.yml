@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visit_in: 2014-04-21 14:30:25
+  visit_out: 2014-04-21 14:30:25
+
+two:
+  visit_in: 2014-04-21 14:30:25
+  visit_out: 2014-04-21 14:30:25

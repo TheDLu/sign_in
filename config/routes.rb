@@ -1,4 +1,10 @@
 SignIn::Application.routes.draw do
+  resources :guests
+
+  resources :visits
+
+  resources :residences
+
   resources :residents
 
   devise_for :users

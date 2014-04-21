@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Visit in:</strong>
+  <%= @visit.visit_in %>
+</p>
+
+<p>
+  <strong>Visit out:</strong>
+  <%= @visit.visit_out %>
+</p>
+
+<%= link_to 'Edit', edit_visit_path(@visit) %> |
+<%= link_to 'Back', visits_path %>
