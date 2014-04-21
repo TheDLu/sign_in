@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140421183120) do
+ActiveRecord::Schema.define(version: 20140421192346) do
 
   create_table "guests", force: true do |t|
     t.string   "name"
@@ -27,7 +27,10 @@ ActiveRecord::Schema.define(version: 20140421183120) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "residences", ["user_id"], name: "index_residences_on_user_id"
 
   create_table "residents", force: true do |t|
     t.string   "name"
@@ -35,7 +38,10 @@ ActiveRecord::Schema.define(version: 20140421183120) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "residence_id"
   end
+
+  add_index "residents", ["residence_id"], name: "index_residents_on_residence_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -60,6 +66,11 @@ ActiveRecord::Schema.define(version: 20140421183120) do
     t.datetime "visit_out"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "guest_id"
+    t.integer  "resident_id"
   end
+
+  add_index "visits", ["guest_id"], name: "index_visits_on_guest_id"
+  add_index "visits", ["resident_id"], name: "index_visits_on_resident_id"
 
 end

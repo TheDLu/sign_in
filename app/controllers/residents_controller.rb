@@ -1,30 +1,22 @@
 class ResidentsController < ApplicationController
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
 
-  # GET /residents
-  # GET /residents.json
   def index
     @residents = Resident.all
   end
 
-  # GET /residents/1
-  # GET /residents/1.json
   def show
   end
 
-  # GET /residents/new
   def new
-    @resident = Resident.new
+    @resident = current_user.residents.build
   end
 
-  # GET /residents/1/edit
   def edit
   end
 
-  # POST /residents
-  # POST /residents.json
   def create
-    @resident = Resident.new(resident_params)
+    @resident = current_user.residents.build(resident_params)
 
     respond_to do |format|
       if @resident.save
@@ -37,8 +29,6 @@ class ResidentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /residents/1
-  # PATCH/PUT /residents/1.json
   def update
     respond_to do |format|
       if @resident.update(resident_params)
@@ -51,8 +41,6 @@ class ResidentsController < ApplicationController
     end
   end
 
-  # DELETE /residents/1
-  # DELETE /residents/1.json
   def destroy
     @resident.destroy
     respond_to do |format|
