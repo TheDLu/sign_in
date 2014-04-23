@@ -1,5 +1,7 @@
 class ResidentsController < ApplicationController
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
+  #before_action :correct_user, only: [:edit, :update, :destroy]
+  #before_action :authenticate_user!, except: [:show, :index]
 
   def index
     @residents = Resident.all
@@ -9,14 +11,14 @@ class ResidentsController < ApplicationController
   end
 
   def new
-    @resident = current_user.residents.build
+    @resident = Resident.new
   end
 
   def edit
   end
 
   def create
-    @resident = current_user.residents.build(resident_params)
+    @resident = Resident.new(resident_params)
 
     respond_to do |format|
       if @resident.save
@@ -53,6 +55,11 @@ class ResidentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_resident
       @resident = Resident.find(params[:id])
+    end
+
+    def correct_user
+      @resident = current_user.residence.residents.find_by(id: params[:id])
+      redirect_to residents_path, notice: "Not authorized to edit this Residence" if @resident.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

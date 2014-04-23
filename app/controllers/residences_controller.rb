@@ -1,7 +1,8 @@
 class ResidencesController < ApplicationController
   before_action :set_residence, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  
 
   def index
     @residences = Residence.all
@@ -51,6 +52,10 @@ class ResidencesController < ApplicationController
     end
   end
 
+  def residence_inhabitants
+    @residence_inhabitants = Resident.where(:residence_id => @residence.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_residence
@@ -58,8 +63,16 @@ class ResidencesController < ApplicationController
     end
 
     def correct_user
+      #if current_user.nil?
+      #  redirect_to residences_path, notice: "Not authorized to edit this Residence"        
+      #else
+      #  @residence = current_user.residences.find_by(id: params[:id])
+      #  redirect_to residences_path, notice: "Not authorized to edit this Residence" if @residence.nil?
+      #end
+
       @residence = current_user.residences.find_by(id: params[:id])
-      redirect_to residences_path, notice: "Not authorized to edit this Residence" if @residence.nil?
+        redirect_to residences_path, notice: "Not authorized to edit this Residence" if @residence.nil?
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
