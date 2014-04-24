@@ -15,5 +15,11 @@
   <%= @resident.email %>
 </p>
 
+<p>
+  <strong>Residence:</strong>
+  <%= @resident.residence_id %>
+</p>
+
 <%= link_to 'Edit', edit_resident_path(@resident) %> |
-<%= link_to 'Back', residents_path %>
+<%= link_to 'Residences List', residences_path %> |
+<%= link_to 'Residents List', residents_path %>

@@ -4,8 +4,9 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
       <th>Description</th>
+      <th>Property Owner Email</th>
+      <th>Residents</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,8 +17,9 @@
     <% @residences.each do |residence| %>
       <tr>
         <td><%= residence.name %></td>
-        <td><%= residence.user.email %></td>
         <td><%= residence.description %></td>
+        <td><%= residence.user.email %></td>
+        <td><%= residence.residents.count %></td>
         <td><%= link_to 'Show', residence %></td>
         <% if residence.user == current_user %>
           <td><%= link_to 'Edit', edit_residence_path(residence) %></td>

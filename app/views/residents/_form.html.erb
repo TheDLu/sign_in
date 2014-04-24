@@ -23,7 +23,14 @@
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
+
+  <div class="field">
+    <%= f.label :residence_id %><br>
+    <%= f.text_field :residence_id, :value => @res_id %>
+  </div>  
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Phone number</th>
       <th>Email</th>
+      <th>Residence ID</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,6 +19,7 @@
         <td><%= resident.name %></td>
         <td><%= resident.phone_number %></td>
         <td><%= resident.email %></td>
+        <td><%= resident.residence_id %></td>
         <td><%= link_to 'Show', resident %></td>
         <td><%= link_to 'Edit', edit_resident_path(resident) %></td>
         <td><%= link_to 'Destroy', resident, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -28,4 +30,8 @@
 
 <br>
 
-<%= link_to 'New Resident', new_resident_path %>
+<%= link_to 'Back to Residences List', residences_path %>
+<% if @res_id != nil %>
+   | 
+   <%= link_to 'Add New Resident', new_resident_path %>
+<% end %>

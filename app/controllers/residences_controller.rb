@@ -52,9 +52,9 @@ class ResidencesController < ApplicationController
     end
   end
 
-  def residence_inhabitants
-    @residence_inhabitants = Resident.where(:residence_id => @residence.id)
-  end
+ # def residence_inhabitants
+ # @residence_inhabitants = Resident.where(:residence_id => @residence.id)
+ # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

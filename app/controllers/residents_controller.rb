@@ -11,10 +11,13 @@ class ResidentsController < ApplicationController
   end
 
   def new
-    @resident = Resident.new
+    @res_id = params[:residence_id]
+    redirect_to residents_path, notice: "Not authorized to edit this Residence" if @res_id.nil?
+    @resident = Resident.new()
   end
 
   def edit
+    @res_id = @resident.residence_id
   end
 
   def create
@@ -59,11 +62,11 @@ class ResidentsController < ApplicationController
 
     def correct_user
       @resident = current_user.residence.residents.find_by(id: params[:id])
-      redirect_to residents_path, notice: "Not authorized to edit this Residence" if @resident.nil?
+      redirect_to residents_path, notice: "Add residents by selecting a Residence" if @resident.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resident_params
-      params.require(:resident).permit(:name, :phone_number, :email)
+      params.require(:resident).permit(:name, :phone_number, :email, :residence_id)
     end
 end
