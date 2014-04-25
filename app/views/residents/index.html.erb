@@ -10,6 +10,7 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -20,11 +21,13 @@
         <td><%= resident.phone_number %></td>
         <td><%= resident.email %></td>
         <td><%= resident.residence_id %></td>
-        <%# if residence.user == current_user %>
+        <% if resident.residence.user == current_user %>
           <td><%= link_to 'Show', resident %></td>
           <td><%= link_to 'Edit', edit_resident_path(resident) %></td>
           <td><%= link_to 'Destroy', resident, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%# end %>
+        <% else %>
+          <td><%= link_to 'Visit', visits_path %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
