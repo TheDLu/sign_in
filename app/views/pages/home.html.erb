@@ -3,11 +3,13 @@
 	<p>
 		
 		<% if user_signed_in? %>
-			# do something
+			<%= link_to "Residences", residences_path, class: "btn btn-default btn-lg" %>
+			<%= link_to "Residents list", residents_path, class: "btn btn-primary btn-lg" %>
 		<% else %>
 			<p>
-				<%= link_to "Log in", new_user_session_path, class: "btn btn-default btn-lg" %>
-				<%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+				<%= link_to "Log in to my property", new_user_session_path, class: "btn btn-default btn-lg" %>
+				<%= link_to "Sign up my property", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+				<%= link_to "Visitors/ Guests", residents_path, class: "btn btn-success btn-lg" %>
 			</p>
 		<% end %>
 </div>
